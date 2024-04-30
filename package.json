@@ -24,6 +24,7 @@
     "craco-less": "^1.20.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
+    "nodemon": "^3.1.0",
     "plotly.js": "^1.54.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -54,8 +55,7 @@
     "extends": "react-app"
   },
   "husky": {
-    "hooks": {
-    }
+    "hooks": {}
   },
   "jest": {
     "collectCoverageFrom": [
@@ -81,7 +81,7 @@
     "format": "prettier --write 'src/**/*.{js,jsx,css,scss}'",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "prettier": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
-    "start": "node start.js",
+    "start": "npx nodemon start.js",
     "test": "craco test --env=jest-environment-jsdom-sixteen"
   },
   "version": "0.1.0"

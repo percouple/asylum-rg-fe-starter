@@ -41,13 +41,43 @@
     font-size: 1.2rem;
 }
 
-// .graphs-section {
-//  ADD THIS BACK IN WHEN YOU HAVE THE GRAPHS SECTION
-// }
+// graphs-section as a whole
+.graphs-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-height: 20rem;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// graphs-section image cards
+.graphs-section div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+// Graph section individual images
+.graphs-section div img {
+    height: 150px;
+}
+
+// graphs-section image labels
+.graphs-section div h3 {
+    margin-top: 1rem;
+}
 
 .view-more-data-btn-container {
+    display: flex;
+    justify-content: space-around;
     height: 44px;
-    width: 180px;
+    width: 350px;
     margin: 0 auto;
     text-align: center;
     margin-bottom: 10%;
@@ -92,6 +122,10 @@
         display: flex;
         flex-wrap: wrap;
     }
+}
+
+.ant-btn {
+    min-width: 160px;
 }
 
 .ant-btn:hover {
