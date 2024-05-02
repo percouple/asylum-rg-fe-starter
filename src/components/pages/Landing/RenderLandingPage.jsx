@@ -81,10 +81,39 @@ function RenderLandingPage(props) {
       </div>
       <div>
         {/* Bottom Section: Add code here for the graphs section for your first ticket */}
-        {/* <div className="bottom-section">*/}
-        <p onClick={() => scrollToTop()} className="back-to-top">
-          Back To Top ^
-        </p>
+        <div className="bottom-section">
+          <h1>Systemic Disparity Insights</h1>
+          <div className="bottom-section-content-container">
+            <div className='bottom-section-individual-container'>
+              <h2 className="bottom-section-header">36%</h2>
+              <div className='bottom-section-paragraph'>
+                By the end of the Trump administration, the average asylum
+                office grant rate had fallen 36 percent from an average of 44
+                percent in fiscal year 2016 to 28 percent in fiscal year 2020.
+              </div>
+            </div>
+            <div className='bottom-section-individual-container'>
+              <h2 className="bottom-section-header">5%</h2>
+              <div className='bottom-section-paragraph'>
+                The New york asylum office grant rate dropped to 5 percent
+                in fiscal year 2020.
+              </div>
+            </div>
+            <div className='bottom-section-individual-container'>
+              <h2 className="bottom-section-header">6x Lower</h2>
+              <div className='bottom-section-paragraph'>
+                Between fiscal year 2017 and 2020, the New York asylum office's
+                average grant rate was six times lower than the San Francisco asylum office.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bottom-button-container">
+        <Button className='read-more'>Read More</Button>
+        <Button onClick={() => scrollToTop()} className="back-to-top">
+          Back To Top 
+        </Button>
+        </div>
       </div>
     </div>
   );
