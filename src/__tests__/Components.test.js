@@ -38,6 +38,6 @@ describe('Landing Page components render', () => {
     test('[3] Disparity Insights section appears on screen', async () => {
 
         expect(await screen.findByText('Systemic Disparity Insights')).toBeVisible();
-        expect(await screen.findByText(''))
-    })
+
+    });
 });
