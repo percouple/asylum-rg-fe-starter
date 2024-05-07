@@ -5,7 +5,7 @@ import GrantRatesByNationalityImg from '../../../styles/Images/pie-chart-no-text
 import GrantRatesOverTimeImg from '../../../styles/Images/line-graph-no-text.png';
 import HrfPhoto from '../../../styles/Images/paper-stack.jpg';
 import '../../../styles/RenderLandingPage.less';
-import { Button } from 'antd';
+// import { button } from 'antd';
 import { useHistory } from 'react-router-dom';
 // for the purposes of testing PageNav
 // import PageNav from '../../common/PageNav';
@@ -47,20 +47,18 @@ function RenderLandingPage(props) {
         </div>
       </div>
       <div className="view-more-data-btn-container">
-        <Button
+        <button className='mid-page-button'
           type="default"
-          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
           onClick={() => history.push('/graphs')}
         >
           View the Data
-        </Button>
-        <Button
+        </button>
+        <button className='mid-page-button'
           type='default'
-          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
           onClick={console.log(`I'm getting clicked yo`)}
         >
           Download the Data
-        </Button>
+        </button>
       </div>
 
       <div className="middle-section">
@@ -109,10 +107,10 @@ function RenderLandingPage(props) {
           </div>
         </div>
         <div className="bottom-button-container">
-        <Button className='read-more'>Read More</Button>
-        <Button onClick={() => scrollToTop()} className="back-to-top">
+        <button className='mid-page-button'>Read More</button>
+        <button onClick={() => scrollToTop()} className="mid-page-button">
           Back To Top 
-        </Button>
+        </button>
         </div>
       </div>
     </div>
