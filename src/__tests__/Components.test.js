@@ -11,11 +11,10 @@ describe('Landing Page components render', () => {
 
     test('[1] Graphs appear on screen', async () => {
 
-        // screen.debug();
         const byOfficeGraph = await screen.findByAltText('Grant Rates By Office Graph');
         const byNationalityGraph = await screen.findByAltText('Grant Rates By Nationality Graph');
         const ratesOverTimeGraph = await screen.findByAltText('Grant Rates Over Time Graph');
-
+        
         expect(byOfficeGraph).toBeVisible();
         expect(byNationalityGraph).toBeVisible();
         expect(ratesOverTimeGraph).toBeVisible();
