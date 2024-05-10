@@ -100,11 +100,13 @@ function GraphWrapper(props) {
     fiscalSummary.citizenshipResults = citizenshipSummary;
 
     stateSettingCallback(view, office, [fiscalSummary]);
-
   }
+
+  // Clear query button handler
   const clearQuery = (view, office) => {
     dispatch(resetVisualizationQuery(view, office));
   };
+
   return (
     <div
       className="map-wrapper-container"
