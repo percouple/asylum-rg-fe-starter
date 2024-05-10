@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 import CitizenshipMapAll from './Graphs/CitizenshipMapAll';
 import CitizenshipMapSingleOffice from './Graphs/CitizenshipMapSingleOffice';
 import TimeSeriesAll from './Graphs/TimeSeriesAll';
@@ -8,21 +10,25 @@ import OfficeHeatMap from './Graphs/OfficeHeatMap';
 import TimeSeriesSingleOffice from './Graphs/TimeSeriesSingleOffice';
 import YearLimitsSelect from './YearLimitsSelect';
 import ViewSelect from './ViewSelect';
-import axios from 'axios';
 import { resetVisualizationQuery } from '../../../state/actionCreators';
-import test_data from '../../../data/test_data.json';
+// import test_data from '../../../data/test_data.json';
 import { colors } from '../../../styles/data_vis_colors';
 import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
 
 const { background_color } = colors;
 
+// Sets graph to render based on the user's selection of buttons on the page
 function GraphWrapper(props) {
   const { set_view, dispatch } = props;
   let { office, view } = useParams();
+
+  // Sets graph view to "time series" if none is selected
   if (!view) {
     set_view('time-series');
     view = 'time-series';
   }
+
+  // Sets map to render to the correct component
   let map_to_render;
   if (!office) {
     switch (view) {
@@ -50,61 +56,51 @@ function GraphWrapper(props) {
         break;
     }
   }
-  function updateStateWithNewData(years, view, office, stateSettingCallback) {
-    /*
-          _                                                                             _
-        |                                                                                 |
-        |   Example request for once the `/summary` endpoint is up and running:           |
-        |                                                                                 |
-        |     `${url}/summary?to=2022&from=2015&office=ZLA`                               |
-        |                                                                                 |
-        |     so in axios we will say:                                                    |
-        |                                                                                 |     
-        |       axios.get(`${url}/summary`, {                                             |
-        |         params: {                                                               |
-        |           from: <year_start>,                                                   |
-        |           to: <year_end>,                                                       |
-        |           office: <office>,       [ <-- this one is optional! when    ]         |
-        |         },                        [ querying by `all offices` there's ]         |
-        |       })                          [ no `office` param in the query    ]         |
-        |                                                                                 |
-          _                                                                             _
-                                   -- Mack 
-    
-    */
 
-    if (office === 'all' || !office) {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-          },
-        })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    } else {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-            office: office,
-          },
-        })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
-        });
+  // Helper for axios requests to grab info from the API
+  async function getSummary(reqUrl, years, type, office) {
+
+    // Declare params
+    let paramsObj = {
+      params: {
+        from: years[0],
+        to: years[1],
+      },
+    };
+
+    // Add the office param (if applicable)
+    if (office && office !== 'all') {
+      paramsObj.params.office = office;
     }
+
+    // Execute the request
+    return await axios
+      .get(`${reqUrl}/${type}Summary`, paramsObj )
+      .then(result => {
+        return result.data;
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  // Updates state with the requested data from the API
+  async function updateStateWithNewData(
+    years,
+    view,
+    office,
+    stateSettingCallback
+  ) {
+    
+    // Structure return from API request, and send it with helper getSummary(), with given params
+    let reqUrl = 'https://hrf-asylum-be-b.herokuapp.com/cases';
+    let fiscalSummary = await getSummary(reqUrl, years, 'fiscal', office);
+    let citizenshipSummary = await getSummary(reqUrl, years, 'citizenship', office);
+
+    fiscalSummary.citizenshipResults = citizenshipSummary;
+
+    stateSettingCallback(view, office, [fiscalSummary]);
+
   }
   const clearQuery = (view, office) => {
     dispatch(resetVisualizationQuery(view, office));
