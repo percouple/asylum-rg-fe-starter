@@ -55,7 +55,6 @@ function RenderLandingPage(props) {
         </button>
         <button className='mid-page-button'
           type='default'
-          onClick={console.log(`I'm getting clicked yo`)}
         >
           Download the Data
         </button>
