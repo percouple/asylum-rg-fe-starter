@@ -32,8 +32,8 @@ function HeaderContent() {
               to="/"
               style={{
                 color: '#E2F0F7',
-                marginLeft: '25px',
-                marginRight: '25px',
+                marginLeft: '15px',
+                marginRight: '15px',
               }}
             >
               Home
@@ -42,8 +42,8 @@ function HeaderContent() {
               to="/graphs"
               style={{
                 color: '#E2F0F7',
-                marginLeft: '25px',
-                marginRight: '25px',
+                marginLeft: '15px',
+                marginRight: '15px',
               }}
             >
               Graphs
@@ -52,8 +52,8 @@ function HeaderContent() {
               to="/profile"
               style={{
                 color: '#E2F0F7',
-                marginLeft: '25px',
-                marginRight: '25px',
+                marginLeft: '15px',
+                marginRight: '15px',
               }}
             >
               Profile
